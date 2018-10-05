@@ -1,11 +1,12 @@
 package MSAOperation.operation;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class OperationChange {
-
-    private int id_transaction;
+    @Id
+    private int id;
     private String devise_source;
     private String devise_destination;
     private int montant;
@@ -13,7 +14,7 @@ public class OperationChange {
     private float taux;
 
     public OperationChange(int id_transaction, String devise_source, String devise_destination, int montant, String date, float taux) {
-        this.id_transaction = id_transaction;
+        this.id= id;
         this.devise_source = devise_source;
         this.devise_destination = devise_destination;
         this.montant = montant;
@@ -22,11 +23,11 @@ public class OperationChange {
     }
 
     public int getId_transaction() {
-        return id_transaction;
+        return id;
     }
 
     public void setId_transaction(int id_transaction) {
-        this.id_transaction = id_transaction;
+        this.id = id_transaction;
     }
 
     public String getDevise_source() {
@@ -72,7 +73,7 @@ public class OperationChange {
     @Override
     public String toString() {
         return "OperationChange{" +
-                "id_transaction=" + id_transaction +
+                "id_transaction=" + id +
                 ", devise_source='" + devise_source + '\'' +
                 ", devise_destination='" + devise_destination + '\'' +
                 ", montant=" + montant +

@@ -1,35 +1,32 @@
 package MSAOperation.operation;
 
-import MSAOperation.operation.dao.OperationChangeDAO;
+import MSAOperation.operation.dao.OperationChangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class OperationChangeController {
 
     @Autowired
-    private OperationChangeDAO ocDao;
+    private Environment environment;
 
-    @GetMapping(value="OperationChanges")
-    public List<OperationChange> listeOCs(){
-        return ocDao.findAll();
-    }
+    @Autowired
+    private OperationChangeRepository ocRep;
 
-    @GetMapping(value="OperationChangeID/{id}")
+    @GetMapping(value="/operation-change/id/{id}")
     public OperationChange afficherParSourceEtDest(@PathVariable("id") int id){
-        return ocDao.findByID(id);
+        return ocRep.findById(id);
     }
 
-    @PostMapping(value="CreerOC")
+    @PostMapping(value="/operation-change/creerOC")
     public void creerTC(@RequestBody OperationChange oc){
-        OperationChange tc1 = ocDao.save(oc);
+        ocRep.save(oc);
     }
 
-    @DeleteMapping(value="SupprimerOC/{id}")
+    @DeleteMapping(value="/operation-change/SupprimerOC/id/{id}")
     public void supprimerTC(@PathVariable("id") int id){
-        ocDao.delete(ocDao.findByID(id));
+        ocRep.delete(ocRep.findById(id));
     }
 
     //operation CRUD de update se fait automatiquement via h2
